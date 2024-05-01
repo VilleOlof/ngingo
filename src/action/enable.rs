@@ -21,7 +21,7 @@ pub fn run() {
         .default(0)
         .interact()
         .unwrap();
-    let site = &sites_enabled[selected_site];
+    let site = &disabled_sites[selected_site];
 
     #[cfg(target_os = "unix")]
     {

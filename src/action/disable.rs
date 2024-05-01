@@ -21,7 +21,7 @@ pub fn run() {
         .default(0)
         .interact()
         .unwrap();
-    let site = &sites_enabled[selected_site];
+    let site = &enabled_sites[selected_site];
 
     let sites_enabled = PathBuf::from(get_nginx_dir())
         .join("sites-enabled")
