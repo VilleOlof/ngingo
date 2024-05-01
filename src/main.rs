@@ -38,6 +38,19 @@ pub fn get_sites_available() -> Vec<String> {
     sites
 }
 
+pub fn restart_nginx() {
+    #[cfg(target_os = "unix")]
+    {
+        let output = std::process::Command::new("sudo")
+            .arg("systemctl")
+            .arg("restart")
+            .arg("nginx")
+            .output()
+            .expect("Failed to restart nginx");
+        println!("{}", String::from_utf8_lossy(&output.stdout));
+    }
+}
+
 fn main() {
     #[cfg(debug_assertions)]
     {
@@ -57,7 +70,7 @@ fn main() {
     println!(
         "{}\n{}\n",
         "Nginxgo".green().bold().underline(),
-        "Create a new Nginx Proxy Configuration".bright_black()
+        "Manage Nginx Proxy Configurations".bright_black()
     );
 
     let action: Action = Select::new()
@@ -76,4 +89,10 @@ fn main() {
         .into();
 
     action.run();
+
+    // Restart nginx if not adding or removing a certificate
+    // Adding or removing a certificate does not require a restart
+    if action != Action::AddCert || action != Action::RemoveCert {
+        restart_nginx();
+    }
 }

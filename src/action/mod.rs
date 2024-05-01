@@ -5,6 +5,7 @@ pub mod enable;
 pub mod remove;
 pub mod remove_cert;
 
+#[derive(Debug, PartialEq)]
 pub enum Action {
     Create,
     AddCert,
