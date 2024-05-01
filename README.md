@@ -1,22 +1,22 @@
-# Nginxgo
+# Ngingo
 
 A minimal, lightweight way to manage Nginx proxy configurations.  
 
 ## Installation
 
 ```bash
-git clone https://github.com/VilleOlof/nginxgo.git
-cd nginxgo
+git clone https://github.com/VilleOlof/ngingo.git
+cd ngingo
 cargo build --release
 
 # Symlink the binary to a directory in your PATH
-sudo ln -s $(pwd)/target/release/nginxgo /usr/local/bin/nginxgo
+sudo ln -s $(pwd)/target/release/ngingo /usr/local/bin/ngingo
 ```
 
 ## Usage
 
 ```bash
-> nginxgo
+> ngingo
 # And then follow the instructions
 ```
 

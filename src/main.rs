@@ -69,7 +69,7 @@ fn main() {
 
     println!(
         "{}\n{}\n",
-        "Nginxgo".green().bold().underline(),
+        "Ngingo".green().bold().underline(),
         "Manage Nginx Proxy Configurations".bright_black()
     );
 
