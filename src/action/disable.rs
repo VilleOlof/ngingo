@@ -15,6 +15,11 @@ pub fn run() {
         .map(|site| site.to_string())
         .collect::<Vec<String>>();
 
+    if enabled_sites.is_empty() {
+        println!("{}", "No sites to disable".yellow());
+        return;
+    }
+
     let selected_site = Select::new()
         .with_prompt("Select a site to disable")
         .items(&enabled_sites)
