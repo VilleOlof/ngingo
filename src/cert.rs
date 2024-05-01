@@ -1,4 +1,4 @@
-use std::{collections::HashMap, fmt::Display, fs, path::PathBuf};
+use std::{collections::HashMap, env::current_exe, fmt::Display, fs, path::PathBuf};
 
 use serde::{Deserialize, Serialize};
 
@@ -51,16 +51,22 @@ impl Cert {
 
 const CERT_DATA: &str = "./certs.toml";
 pub fn load_certs() -> Vec<Cert> {
-    if !PathBuf::from(CERT_DATA).exists() {
+    let base = current_exe().expect("Failed to get current executable path");
+    let path = base.parent().unwrap().join(CERT_DATA);
+
+    if !path.exists() {
         return vec![];
     }
 
-    let data = fs::read_to_string(CERT_DATA).expect("Failed to read certs.toml");
+    let data = fs::read_to_string(path).expect("Failed to read certs.toml");
     let certs: CertMap = toml::from_str(&data).expect("Failed to parse certs.toml");
     Cert::from_toml(certs)
 }
 
 pub fn save_certs(certs: Vec<Cert>) {
+    let base = current_exe().expect("Failed to get current executable path");
+    let path = base.parent().unwrap().join(CERT_DATA);
+
     let data = toml::to_string(&Cert::to_toml(certs)).expect("Failed to serialize certs.toml");
-    fs::write(CERT_DATA, data).expect("Failed to write certs.toml");
+    fs::write(path, data).expect("Failed to write certs.toml");
 }
