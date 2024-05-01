@@ -89,8 +89,10 @@ fn create(opts: Options) {
 
     fs::write(&config_path, config).expect("Failed to write configuration file");
 
-    #[cfg(target_os = "unix")]
+    #[cfg(target_os = "linux")]
     {
+        use std::os;
+
         let symlink_path = PathBuf::from(get_nginx_dir())
             .join("sites-enabled")
             .join(&opts.config_name)

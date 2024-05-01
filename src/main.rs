@@ -39,7 +39,7 @@ pub fn get_sites_available() -> Vec<String> {
 }
 
 pub fn restart_nginx() {
-    #[cfg(target_os = "unix")]
+    #[cfg(target_os = "linux")]
     {
         let output = std::process::Command::new("sudo")
             .arg("systemctl")
