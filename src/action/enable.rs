@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use colored::Colorize;
 use dialoguer::Select;
 
-use crate::{get_sites_available, get_sites_enabled, NGINX_DIR};
+use crate::{get_sites_available, get_sites_enabled};
 
 pub fn run() {
     let sites_enabled = get_sites_enabled();
@@ -30,5 +30,5 @@ pub fn run() {
         os::unix::fs::symlink(sites_available, sites_enabled).expect("Failed to create symlink");
     }
 
-    println!("{} {}", "Enabled".red(), site.to_string().red().bold());
+    println!("{} {}", "Enabled".green(), site.to_string().green().bold());
 }
